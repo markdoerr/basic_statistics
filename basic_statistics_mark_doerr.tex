@@ -57,10 +57,426 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 \maketitle
-
 \setkeys{Gin}{width=width=0.8\textwidth}
 
+\section{Using R Studio}
+
+\subsection{Windows in R Studio}
+
+\begin{itemize}
+ \item Text Editor window 
+ \item Console
+ \item Environment window
+ \item Help and Plots Window
+\end{itemize}
+
+\subsection{Getting help}
+
+Help/documentation viewer
+
+Hitting F1 on a function shows help.
+
+\section{Basic Data Types in R}
+
+\subsection{vector}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{=} \hlnum{1}
+
+\hlstd{x}
+\end{alltt}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{alltt}
+\hlstd{x[}\hlnum{1}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{alltt}
+\hlstd{y} \hlkwb{=} \hlstd{(}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{)}
+
+\hlstd{y}
+\end{alltt}
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+\begin{alltt}
+\hlstd{y[}\hlnum{2}\hlstd{]}
+\end{alltt}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\subsection{matrix}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{a_mtr} \hlkwb{=} \hlkwd{matrix}\hlstd{(y,} \hlkwc{nrow}\hlstd{=}\hlnum{2}\hlstd{)}
+
+\hlstd{a_mtr}
+\end{alltt}
+\begin{verbatim}
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    3    5    7    9
+## [2,]    2    4    6    8   10
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\subsection{list}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{a_lst} \hlkwb{=} \hlkwd{list}\hlstd{(}\hlstr{"A"}\hlstd{,} \hlnum{1}\hlstd{)}
+
+\hlstd{a_lst}
+\end{alltt}
+\begin{verbatim}
+## [[1]]
+## [1] "A"
+## 
+## [[2]]
+## [1] 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\subsection{data frame}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{=} \hlstd{(}\hlnum{1}\hlopt{:}\hlnum{10}\hlstd{)}
+\hlstd{my_first_data_frame_df} \hlkwb{=} \hlkwd{data.frame}\hlstd{(}\hlstr{"x"}\hlstd{=x,} \hlstr{"y"}\hlstd{=x}\hlopt{*}\hlnum{0.1} \hlstd{)}
+
+\hlstd{my_first_data_frame_df}
+\end{alltt}
+\begin{verbatim}
+##     x   y
+## 1   1 0.1
+## 2   2 0.2
+## 3   3 0.3
+## 4   4 0.4
+## 5   5 0.5
+## 6   6 0.6
+## 7   7 0.7
+## 8   8 0.8
+## 9   9 0.9
+## 10 10 1.0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+This shows how to access the data of the data frame
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{my_first_data_frame_df[,}\hlnum{1}\hlstd{]} \hlcom{# first column}
+\end{alltt}
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+\begin{alltt}
+\hlstd{my_first_data_frame_df}\hlopt{$}\hlstd{x}  \hlcom{# first column by name}
+\end{alltt}
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+\begin{alltt}
+\hlstd{my_first_data_frame_df[}\hlnum{1}\hlstd{,]} \hlcom{# first line}
+\end{alltt}
+\begin{verbatim}
+##   x   y
+## 1 1 0.1
+\end{verbatim}
+\begin{alltt}
+\hlstd{my_first_data_frame_df[}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{]} \hlcom{# second element of second line}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{10}
+\hlstd{w} \hlkwb{<-} \hlnum{20} \hlopt{+} \hlnum{10}\hlopt{*}\hlstd{x}
+\hlstd{w}
+\end{alltt}
+\begin{verbatim}
+##  [1]  30  40  50  60  70  80  90 100 110 120
+\end{verbatim}
+\begin{alltt}
+\hlstd{linear_sample_df} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{x}\hlstd{=x,} \hlkwc{y}\hlstd{=w} \hlopt{+} \hlkwd{rnorm}\hlstd{(}\hlnum{10}\hlstd{)}\hlopt{*}\hlnum{10}\hlstd{)}
+
+\hlkwd{plot}\hlstd{(linear_sample_df)}
+
+\hlstd{linear_model_lm} \hlkwb{<-} \hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{x,} \hlkwc{data}\hlstd{=linear_sample_df)}
+\hlkwd{summary}\hlstd{(linear_model_lm)}
+\end{alltt}
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = y ~ x, data = linear_sample_df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -10.4428  -4.8458  -0.8379   4.9563   9.3348 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  28.1239     4.8138   5.842 0.000386 ***
+## x             8.7173     0.7758  11.236 3.53e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.047 on 8 degrees of freedom
+## Multiple R-squared:  0.9404,	Adjusted R-squared:  0.933 
+## F-statistic: 126.3 on 1 and 8 DF,  p-value: 3.533e-06
+\end{verbatim}
+\begin{alltt}
+\hlkwd{abline}\hlstd{(linear_model_lm,} \hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/in-build_data_sets_-_data_frame_2-1} 
+
+\end{knitrout}
+
+
+\subsection{Examples of in-build data sets for testing}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(}\hlkwc{help} \hlstd{=} \hlstr{"datasets"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\subsubsection{Iris}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{head}\hlstd{(iris)}
+\end{alltt}
+\begin{verbatim}
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+\end{verbatim}
+\begin{alltt}
+\hlkwd{head}\hlstd{(iris3)}
+\end{alltt}
+\begin{verbatim}
+## [1] 5.1 4.9 4.7 4.6 5.0 5.4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\subsubsection*{women}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+##   height weight
+## 1     58    115
+## 2     59    117
+## 3     60    120
+## 4     61    123
+## 5     62    126
+## 6     63    129
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\subsubsection*{ELISA - DNAse}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+##   Run       conc density
+## 1   1 0.04882812   0.017
+## 2   1 0.04882812   0.018
+## 3   1 0.19531250   0.121
+## 4   1 0.19531250   0.124
+## 5   1 0.39062500   0.206
+## 6   1 0.39062500   0.215
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\section*{Mean, Average, Summary}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+## [1] 60.1
+## [1] 4.998889
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    51.0    57.5    61.0    60.1    62.5    69.0
+## [1] 61 59 55
+## 
+## 	One Sample t-test
+## 
+## data:  wtcsf[1:4]
+## t = 31.6563, df = 3, p-value = 6.927e-05
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  53.74326 65.75674
+## sample estimates:
+## mean of x 
+##     59.75
+## 
+## 	One Sample t-test
+## 
+## data:  wtcsf
+## t = 38.019, df = 9, p-value = 2.991e-11
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  56.52401 63.67599
+## sample estimates:
+## mean of x 
+##      60.1
+## [1] 45.5
+## [1] 7.382412
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   34.00   40.25   46.50   45.50   49.50   59.00
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\section*{Reading/Writing Data from a File}
+
+
+
+\section*{Basic Plotting in R}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{10}\hlstd{);}
+
+\hlkwd{plot}\hlstd{(x)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/basic_plotting-1} 
+\begin{kframe}\begin{alltt}
+\hlkwd{plot}\hlstd{(x,} \hlkwc{type}\hlstd{=}\hlstr{"l"}\hlstd{,} \hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{,} \hlkwc{main}\hlstd{=}\hlstr{"Line Diagramm"}\hlstd{,} \hlkwc{xlab}\hlstd{=}\hlstr{"time [year]"}\hlstd{,} \hlkwc{ylab}\hlstd{=}\hlstr{"difference/year"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/basic_plotting-2} 
+\begin{kframe}\begin{alltt}
+\hlstd{x} \hlkwb{<-} \hlstd{(}\hlnum{0}\hlopt{:}\hlnum{10}\hlstd{)}
+\hlstd{y} \hlkwb{<-} \hlkwd{sin}\hlstd{(x)}
+
+\hlstd{x}
+\end{alltt}
+\begin{verbatim}
+##  [1]  0  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+\begin{alltt}
+\hlstd{y}
+\end{alltt}
+\begin{verbatim}
+##  [1]  0.0000000  0.8414710  0.9092974  0.1411200 -0.7568025 -0.9589243
+##  [7] -0.2794155  0.6569866  0.9893582  0.4121185 -0.5440211
+\end{verbatim}
+\begin{alltt}
+\hlkwd{plot}\hlstd{(x, y)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/basic_plotting-3} 
+\begin{kframe}\begin{alltt}
+\hlkwd{plot}\hlstd{(x, y,} \hlkwc{type}\hlstd{=}\hlstr{"l"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/basic_plotting-4} 
+\begin{kframe}\begin{alltt}
+\hlstd{x} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{10}\hlstd{); y} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{10}\hlstd{)}
+\hlkwd{plot}\hlstd{(x,y)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/basic_plotting-5} 
+\begin{kframe}\begin{alltt}
+\hlstd{x} \hlkwb{<-} \hlnum{1}\hlopt{:}\hlnum{10}
+\hlstd{w} \hlkwb{<-} \hlnum{20} \hlopt{+} \hlnum{10}\hlopt{*}\hlstd{x}
+\hlstd{w}
+\end{alltt}
+\begin{verbatim}
+##  [1]  30  40  50  60  70  80  90 100 110 120
+\end{verbatim}
+\begin{alltt}
+\hlstd{linear_sample_df} \hlkwb{<-} \hlkwd{data.frame}\hlstd{(}\hlkwc{x}\hlstd{=x,} \hlkwc{y}\hlstd{=w} \hlopt{+} \hlkwd{rnorm}\hlstd{(}\hlnum{10}\hlstd{)}\hlopt{*}\hlnum{10}\hlstd{)}
+
+\hlkwd{plot}\hlstd{(linear_sample_df)}
+
+\hlstd{linear_model_lm} \hlkwb{<-} \hlkwd{lm}\hlstd{(y} \hlopt{~} \hlstd{x,} \hlkwc{data}\hlstd{=linear_sample_df)}
+\hlkwd{summary}\hlstd{(linear_model_lm)}
+\end{alltt}
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = y ~ x, data = linear_sample_df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -10.9983  -3.6736  -0.8972   6.7122  10.6759 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  26.3427     5.5620   4.736  0.00147 ** 
+## x             8.8894     0.8964   9.917 9.03e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 8.142 on 8 degrees of freedom
+## Multiple R-squared:  0.9248,	Adjusted R-squared:  0.9154 
+## F-statistic: 98.34 on 1 and 8 DF,  p-value: 9.034e-06
+\end{verbatim}
+\begin{alltt}
+\hlkwd{abline}\hlstd{(linear_model_lm,} \hlkwc{col}\hlstd{=}\hlstr{"red"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/basic_plotting-6} 
+
+\end{knitrout}
+
+
+\section*{Variance Tests}
+
+
+
+
+\section*{Significance Tests}
+
+
+
+
 \section*{Distributions}
+
+
+
 
 \subsection*{Normal Distribution}
 

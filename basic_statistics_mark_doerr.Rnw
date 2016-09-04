@@ -8,10 +8,242 @@
 
 \begin{document}
 \maketitle
-
 \setkeys{Gin}{width=width=0.8\textwidth}
 
+\section{Using R Studio}
+
+\subsection{Windows in R Studio}
+
+\begin{itemize}
+ \item Text Editor window 
+ \item Console
+ \item Environment window
+ \item Help and Plots Window
+\end{itemize}
+
+\subsection{Getting help}
+
+Help/documentation viewer
+
+Hitting F1 on a function shows help.
+
+\section{Basic Data Types in R}
+
+\subsection{vector}
+
+<<in-build data sets - vector, eval=TRUE, dev='png', echo=TRUE>>=
+
+x = 1
+
+x
+x[1]
+
+y = (1:10)
+
+y
+y[2]
+
+@
+
+
+\subsection{matrix}
+
+<<in-build data sets - maxtrix, eval=TRUE, dev='png', echo=TRUE>>=
+
+a_mtr = matrix(y, nrow=2) 
+
+a_mtr
+
+@
+
+\subsection{list}
+
+<<in-build data sets - list, eval=TRUE, dev='png', echo=TRUE>>=
+
+a_lst = list("A", 1)
+
+a_lst
+
+@
+
+
+\subsection{data frame}
+
+<<in-build data sets - data frame 1, eval=TRUE, dev='png', echo=TRUE>>=
+
+x = (1:10)
+my_first_data_frame_df = data.frame("x"=x, "y"=x*0.1 )
+
+my_first_data_frame_df
+
+@
+
+This shows how to access the data of the data frame
+
+<<in-build data sets - data frame access, eval=TRUE, dev='png', echo=TRUE>>=
+
+my_first_data_frame_df[,1] # first column
+
+my_first_data_frame_df$x  # first column by name
+
+my_first_data_frame_df[1,] # first line
+
+my_first_data_frame_df[2,2] # second element of second line
+
+@
+
+
+
+<<in-build data sets - data frame 2, eval=TRUE, dev='png', echo=TRUE>>=
+
+x <- 1:10
+w <- 20 + 10*x
+w
+
+
+linear_sample_df <- data.frame(x=x, y=w + rnorm(10)*10)
+
+plot(linear_sample_df)
+
+linear_model_lm <- lm(y ~ x, data=linear_sample_df)
+summary(linear_model_lm)
+abline(linear_model_lm, col="red")
+
+@
+
+
+\subsection{Examples of in-build data sets for testing}
+
+<<in-build data sets, eval=TRUE, dev='png', echo=TRUE>>=
+
+library(help = "datasets")
+
+@
+
+\subsubsection{Iris}
+
+<<in-build data sets - iris, eval=TRUE, dev='png', echo=TRUE>>=
+
+head(iris)
+
+head(iris3)
+
+@
+
+\subsubsection*{women}
+
+<<in-build data sets - women, eval=TRUE, dev='png', echo=FALSE>>=
+
+head(women)
+
+@
+
+\subsubsection*{ELISA - DNAse}
+
+<<in-build data sets - DNAse, eval=TRUE, dev='png', echo=FALSE>>=
+
+head(DNase)
+@
+
+
+\section*{Mean, Average, Summary}
+
+<<mean_example, eval=TRUE, dev='png', echo=FALSE>>=
+wts = c(0, 0, 0, 1, 1, 0, 0, 0, 0, 0)
+bdln = c(0, 0, 0, 0, 0, 1, 0, 0, 0, 2)
+wtcsf = c(61, 59, 55, 64, 57, 69, 63, 51 ,61 ,61)
+bdlncsf = c(48, 34, 50, 59, 37, 46, 44, 39, 51, 47)
+
+mean(wtcsf)
+sd(wtcsf)
+summary(wtcsf)
+
+wtcsf[1:3]
+
+t.test(wtcsf[1:4])
+t.test(wtcsf)
+
+
+mean(bdlncsf)
+sd(bdlncsf)
+summary(bdlncsf)
+
+@
+
+\section*{Reading/Writing Data from a File}
+
+<<reading_writing, eval=TRUE, dev='png', echo=TRUE>>=
+
+setwd(".")
+
+input_df = read.csv("demo_data.csv")
+
+input_df
+
+@
+
+\section*{Basic Plotting in R}
+
+<<basic_plotting, eval=TRUE, dev='png', echo=TRUE>>=
+
+x <- rnorm(10); 
+
+plot(x)
+plot(x, type="l", col="red", main="Line Diagramm", xlab="time [year]", ylab="difference/year")
+
+x <- (0:10)
+y <- sin(x)
+
+x
+y
+plot(x, y)
+plot(x, y, type="l")
+
+x <- rnorm(10); y <- rnorm(10)
+plot(x,y)
+
+x <- 1:10
+w <- 20 + 10*x
+w
+
+linear_sample_df <- data.frame(x=x, y=w + rnorm(10)*10)
+
+plot(linear_sample_df)
+
+linear_model_lm <- lm(y ~ x, data=linear_sample_df)
+summary(linear_model_lm)
+abline(linear_model_lm, col="red")
+
+
+@
+
+
+\section*{Variance Tests}
+
+<<variance_tests, eval=TRUE, dev='png', echo=FALSE>>=
+
+x <- rnorm(10); y <- rnorm(10)
+
+@
+
+
+\section*{Significance Tests}
+
+<<significance_tests, eval=TRUE, dev='png', echo=FALSE>>=
+
+x <- rnorm(10); y <- rnorm(10)
+
+@
+
+
 \section*{Distributions}
+
+<<distributions, eval=TRUE, dev='png', echo=FALSE>>=
+
+x <- rnorm(10); y <- rnorm(10)
+
+@
+
 
 \subsection*{Normal Distribution}
 
