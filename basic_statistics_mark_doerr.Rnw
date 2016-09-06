@@ -10,9 +10,9 @@
 \maketitle
 \setkeys{Gin}{width=width=0.8\textwidth}
 
-\section{Using R Studio}
+\chapter{Using R Studio}
 
-\subsection{Windows in R Studio}
+\section{Windows in R Studio}
 
 \begin{itemize}
  \item Text Editor window 
@@ -21,15 +21,15 @@
  \item Help and Plots Window
 \end{itemize}
 
-\subsection{Getting help}
+\section{Getting help}
 
 Help/documentation viewer
 
 Hitting F1 on a function shows help.
 
-\section{Basic Data Types in R}
+\chapter{Basic Data Types in R}
 
-\subsection{vector}
+\section{vectors and strings}
 
 <<in-build data sets - vector, eval=TRUE, dev='png', echo=TRUE>>=
 
@@ -38,10 +38,20 @@ x = 1
 x
 x[1]
 
-y = (1:10)
+y = c(1:10) # vector
 
 y
 y[2]
+
+y + 5
+y * 3.0
+
+y + rnorm(10)
+
+a_string = "hello world" # string
+
+a_string
+
 
 @
 
@@ -96,7 +106,7 @@ my_first_data_frame_df[2,2] # second element of second line
 
 <<in-build data sets - data frame 2, eval=TRUE, dev='png', echo=TRUE>>=
 
-x <- 1:10
+x <- c(1:10)
 w <- 20 + 10*x
 w
 
@@ -191,7 +201,8 @@ x <- rnorm(10);
 plot(x)
 plot(x, type="l", col="red", main="Line Diagramm", xlab="time [year]", ylab="difference/year")
 
-x <- (0:10)
+n=10
+x <- c(0:n)
 y <- sin(x)
 
 x
@@ -226,12 +237,97 @@ x <- rnorm(10); y <- rnorm(10)
 
 @
 
+\section{Standard error of mean}
+
+$$ std_{err} = \frac{\sigma}{\sqrt{n}} $$
+
+<<std error of mean, eval=TRUE, dev='png', echo=FALSE>>=
+
+stderr <- function(x) sqrt(var(x)/length(x))
+
+@
 
 \section*{Significance Tests}
 
 <<significance_tests, eval=TRUE, dev='png', echo=FALSE>>=
 
-x <- rnorm(10); y <- rnorm(10)
+stderr <- function(x) sqrt(var(x)/length(x))
+
+slopes1_vec = vector()
+slopes2_vec = vector()
+
+n = 10
+
+x <- c(1:n)
+
+w1 <- 5*x + 2 
+w2 <- 5.5*x + 2 
+
+curr_sd = 1
+
+for (i in 1:n){
+  linear_sample_df <- data.frame(x=x, y=w1 + rnorm(10, sd=curr_sd)*10)
+  linear_model_lm <- lm(y ~ x, data=linear_sample_df)
+  slopes1_vec = append(slopes1_vec, coef(linear_model_lm)["x"])
+}
+
+slopes1_vec
+
+mean(slopes1_vec[1:3])
+mean(slopes1_vec[3:5])
+
+std_err1 = stderr(slopes1_vec) # standare error of mean
+
+std_err1
+
+2 * std_err1  
+
+plot(slopes1_vec, ylim=c(0,10), col="green")
+
+sl_mean1 = mean(slopes1_vec)
+
+abline(h=sl_mean1,  lty=1,  col="green")
+
+par(new = TRUE) # overlay a figure
+ 
+for (i in 1:n){
+  linear_sample_df <- data.frame(x=x, y=w2 + rnorm(10, sd=curr_sd)*10)
+  linear_model_lm <- lm(y ~ x, data=linear_sample_df)
+  slopes2_vec = append(slopes2_vec, coef(linear_model_lm)["x"])
+}
+
+plot(slopes2_vec, ylim=c(0,10), col="red")
+
+sl_mean2 = mean(slopes2_vec)
+
+abline(h=sl_mean2,  lty=1,  col="red")
+
+slopes_vec = vector() # resetting slopes vector
+
+t.test(slopes1_vec,slopes2_vec, conf.level = 0.95)
+
+dev.off() # stop printing
+
+
+n = 1000
+for (i in 1:n){
+  linear_sample_df <- data.frame(x=x, y=w + rnorm(10)*10)
+  linear_model_lm <- lm(y ~ x, data=linear_sample_df)
+  slopes_vec = append(slopes_vec, coef(linear_model_lm)["x"])
+}
+
+slopes_vec
+
+mean(slopes_vec)
+
+mean(slopes_vec[1:3])
+mean(slopes_vec[3:5])
+
+mean(slopes_vec[1:30])
+mean(slopes_vec[30:50])
+
+mean(slopes_vec[1:300])
+mean(slopes_vec[300:500])
 
 @
 
@@ -280,6 +376,7 @@ result <- paste("P(",lb,"< IQ <",ub,") =",
    signif(area, digits=3))
 mtext(result,3)
 axis(1, at=seq(0.4, 1.6, 0.2), pos=0) 
+
 @
 \caption{Normal Distribution.}
 \end{center}
@@ -345,6 +442,19 @@ for (i in 1:4){
 
 legend("topright", inset=.05, title="Distributions",
   labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)
+@
+
+\section{Integration}
+
+<<integration, eval=TRUE, dev='png', echo=TRUE>>=
+
+int_func <- function(x) {
+  y = sin(x) ** 2 
+  return(y)
+}
+
+integrate(int_func, lower=1 , upper=4)
+
 @
 
 
